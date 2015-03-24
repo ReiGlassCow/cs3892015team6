@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CS389Team6</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="math">Math</string>
+    <string name="geography">Geography</string>
+    <string name="this_starts_activity">This Starts the %1$s Activity.</string>
+
+</resources>
