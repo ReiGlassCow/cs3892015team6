@@ -1,7 +1,7 @@
 package com.turnup.cs389team6.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -25,18 +25,38 @@ public class NavigationActivity extends BaseActivity{
         View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(v instanceof Button){
                     Button cast = (Button) v;
+
+
                     Toast.makeText(
                             NavigationActivity.this,
                             getString(R.string.this_starts_activity, cast.getText()),
                             Toast.LENGTH_SHORT).show();
+                    //Start difficulty activity
+                    switch (v.getId()){
+                        case R.id.button_math:
+                            Intent i = new Intent(v.getContext(),mathOptions.class);
+                            startActivity(i);
+                            break;
+
+                    }
+
                 }
             }
         };
 
         mathButton.setOnClickListener(mOnClickListener);
         geographyButton.setOnClickListener(mOnClickListener);
+
+
+    }
+    public void mathActivity(View v){
+        Intent gameDifficulty = new Intent(this,mathOptions.class);
+        startActivity(gameDifficulty);
+
+
     }
 
 

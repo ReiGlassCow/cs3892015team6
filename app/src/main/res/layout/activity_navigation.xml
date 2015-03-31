@@ -10,13 +10,15 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:id="@+id/linearLayout">
 
         <Button
             android:id="@+id/button_math"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/math"
+
             android:layout_marginBottom="@dimen/padding_large"/>
 
         <Button
@@ -26,6 +28,15 @@
             android:text="@string/geography"/>
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button"
+        android:layout_below="@+id/linearLayout"
+        android:onClick="mathActivity"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

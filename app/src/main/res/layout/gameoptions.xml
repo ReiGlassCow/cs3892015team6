@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:background="#0099cc">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Choose Difficulty Level"
+            android:id="@+id/textView"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="116dp" />
+
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+
+
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignStart="@+id/textView"
+            android:layout_below="@+id/textView"
+            android:layout_alignRight="@+id/textView"
+            android:layout_alignEnd="@+id/textView"
+            android:layout_above="@+id/startGame">
+
+
+            <RadioButton
+                android:onClick="mathButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Level 1"
+                android:id="@+id/radioButton"
+                android:layout_below="@+id/textView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:layout_gravity="center_horizontal" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Level 2"
+                android:id="@+id/radioButton2"
+                android:layout_below="@+id/radioButton"
+                android:onClick="mathButtons"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal" />
+
+            <RadioButton
+                android:onClick="mathButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Level 3"
+                android:id="@+id/radioButton3"
+                android:layout_below="@+id/radioButton2"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal" />
+
+
+        </RadioGroup>
+
+
+
+
+
+
+
+    </RelativeLayout>
+
