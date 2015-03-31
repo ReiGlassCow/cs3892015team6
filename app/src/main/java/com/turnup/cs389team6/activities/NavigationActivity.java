@@ -37,8 +37,7 @@ public class NavigationActivity extends BaseActivity{
                     //Start difficulty activity
                     switch (v.getId()){
                         case R.id.button_math:
-                            Intent i = new Intent(v.getContext(),mathOptions.class);
-                            startActivity(i);
+                            mathActivity(null);
                             break;
 
                     }
@@ -53,7 +52,7 @@ public class NavigationActivity extends BaseActivity{
 
     }
     public void mathActivity(View v){
-        Intent gameDifficulty = new Intent(this,mathOptions.class);
+        Intent gameDifficulty = new Intent(this,MathOptionsActivity.class);
         startActivity(gameDifficulty);
 
 

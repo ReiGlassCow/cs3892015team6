@@ -11,7 +11,7 @@ import com.turnup.cs389team6.R;
 /**
  * Created by Taylor White on 3/26/2015.
  */
-public class mathOptions extends Activity {
+public class MathOptionsActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
