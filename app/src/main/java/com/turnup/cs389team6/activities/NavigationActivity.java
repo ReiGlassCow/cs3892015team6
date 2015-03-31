@@ -39,9 +39,7 @@ public class NavigationActivity extends BaseActivity{
                         case R.id.button_math:
                             mathActivity(null);
                             break;
-
                     }
-
                 }
             }
         };
