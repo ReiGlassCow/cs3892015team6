@@ -7,5 +7,9 @@
     <string name="math">Math</string>
     <string name="geography">Geography</string>
     <string name="this_starts_activity">This Starts the %1$s Activity.</string>
+    <string name="title_activity_game_play">GamePlay</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
