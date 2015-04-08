@@ -17,7 +17,8 @@ import com.turnup.cs389team6.R;
 public class MathOptionsActivity extends Activity {
 
     Button startGame;
-    int selectedLevel=0;
+    int selectedLevel = 0;
+
     @Override
 
 
@@ -26,32 +27,34 @@ public class MathOptionsActivity extends Activity {
         setContentView(R.layout.activity_game_options);
         startGame = (Button) findViewById(R.id.startgame);
     }
-    public void mathButtons(View v){
+
+    public void mathButtons(View v) {
         boolean checked = ((RadioButton) v).isChecked();
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.Level1:
-                Toast.makeText(this,"You have selected difficulty 1",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You have selected difficulty 1", Toast.LENGTH_SHORT).show();
                 selectedLevel = 1;
                 break;
             case R.id.Level2:
-                Toast.makeText(this,"You have selected difficulty 2",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You have selected difficulty 2", Toast.LENGTH_SHORT).show();
+
                 break;
 
 
-
         }
-
 
 
     }
-    public void playGame(View v){
 
-        if(selectedLevel == 0){
-            Toast.makeText(this,"Please selected a difficulty",Toast.LENGTH_LONG).show();
+    public void playGame(View v) {
+        //Check to make sure that user has selected an option.
+        if (selectedLevel == 0) {
+            Toast.makeText(this, "Please selected a difficulty", Toast.LENGTH_LONG).show();
         }
-        else{
-            Intent playGame = new Intent(this,GamePlay.class);
-            playGame.putExtra("LEVEL",selectedLevel);
+        //Start game based off level selection
+        else {
+            Intent playGame = new Intent(this, GamePlay.class);
+            playGame.putExtra("LEVEL", selectedLevel);
             startActivity(playGame);
         }
     }
