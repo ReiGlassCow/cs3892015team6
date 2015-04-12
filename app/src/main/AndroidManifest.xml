@@ -19,10 +19,10 @@
         </activity>
         <activity android:name=".activities.MathOptionsActivity" />
         <activity
-            android:name=".activities.GamePlay"
+            android:name=".activities.GameActivity"
             android:label="@string/title_activity_game_play"></activity>
         <activity
-            android:name=".activities.GamePlay"
+            android:name=".activities.GameActivity"
             android:label="@string/title_activity_game_play"></activity>
     </application>
 

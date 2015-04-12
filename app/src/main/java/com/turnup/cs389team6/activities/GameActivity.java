@@ -12,7 +12,7 @@ import com.turnup.cs389team6.R;
 
 import java.util.Random;
 
-public class GamePlay extends ActionBarActivity {
+public class GameActivity extends BaseActivity {
 
     //Equation numbers
     int levelOne = 10;
