@@ -14,7 +14,8 @@ import com.turnup.cs389team6.constants.Difficulty;
  * Created by Taylor White on 3/26/2015.
  */
 public class MathOptionsActivity extends BaseActivity {
-    private static final String EXTRA_DIFFICULTY = "extra_difficulty";
+    
+    public static final String EXTRA_DIFFICULTY = "extra_difficulty";
 
     private Button startGame;
     Difficulty selectedDifficulty;
@@ -47,9 +48,8 @@ public class MathOptionsActivity extends BaseActivity {
         //Check to make sure that user has selected an option.
         if (selectedDifficulty == null) {
             Toast.makeText(this, "Please selected a difficulty", Toast.LENGTH_LONG).show();
-        }
-        //Start game based off level selection
-        else {
+        } else {
+            //Start game based off level selection
             Intent playGame = new Intent(this, GameActivity.class);
             playGame.putExtra(EXTRA_DIFFICULTY, selectedDifficulty);
             startActivity(playGame);

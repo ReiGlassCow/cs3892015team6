@@ -4,9 +4,9 @@ package com.turnup.cs389team6.constants;
  * Created by Dheer on 4/12/2015.
  */
 public enum Difficulty {
-    LEVEL_ONE(0, 10, Operation.ADD,Operation.SUBTRACT),
-    LEVEL_TWO(0, 15, Operation.ADD, Operation.SUBTRACT, Operation.MULTIPLICATION),
-    LEVEL_THREE (0, 20, Operation.ADD, Operation.SUBTRACT, Operation.MULTIPLICATION, Operation.DIVISION);
+    LEVEL_ONE(0, 11, Operation.ADD,Operation.SUBTRACT),
+    LEVEL_TWO(0, 16, Operation.ADD, Operation.SUBTRACT, Operation.MULTIPLICATION),
+    LEVEL_THREE (0, 21, Operation.ADD, Operation.SUBTRACT, Operation.MULTIPLICATION, Operation.DIVISION);
 
     private final int minValue;
     private final int maxValue;
