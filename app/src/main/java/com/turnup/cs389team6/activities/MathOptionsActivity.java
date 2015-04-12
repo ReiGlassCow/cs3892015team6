@@ -29,7 +29,7 @@ public class MathOptionsActivity extends Activity {
     }
 
     public void mathButtons(View v) {
-       
+
         switch (v.getId()) {
             case R.id.Level1:
                 Toast.makeText(this, "You have selected difficulty 1", Toast.LENGTH_SHORT).show();
