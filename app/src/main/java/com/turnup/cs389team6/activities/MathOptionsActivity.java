@@ -29,7 +29,7 @@ public class MathOptionsActivity extends Activity {
     }
 
     public void mathButtons(View v) {
-        boolean checked = ((RadioButton) v).isChecked();
+       
         switch (v.getId()) {
             case R.id.Level1:
                 Toast.makeText(this, "You have selected difficulty 1", Toast.LENGTH_SHORT).show();
@@ -37,7 +37,7 @@ public class MathOptionsActivity extends Activity {
                 break;
             case R.id.Level2:
                 Toast.makeText(this, "You have selected difficulty 2", Toast.LENGTH_SHORT).show();
-
+                selectedLevel = 2;
                 break;
 
 
