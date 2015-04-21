@@ -1,60 +1,70 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="#0099cc"
-    tools:context="com.turnup.cs389team6.activities.Game">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    tools:context="com.turnup.cs389team6.activities.Game"
+    android:orientation="vertical">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-
-
-        <LinearLayout style="?metaButtonBarStyle"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/black_overlay" android:orientation="horizontal"
-            tools:ignore="UselessParent"
-            android:gravity="center"
-            android:id="@+id/linearLayout">
-
-
-            <TextView
-                android:id="@+id/difficulty_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Level"
-                android:textStyle="bold"
-                android:textSize="50sp"
-                android:textColor="#33b5e5"
-                android:gravity="center_horizontal" />
+    <LinearLayout
+        style="?metaButtonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_overlay"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:id="@+id/linearLayout">
 
 
+        <TextView
+            android:id="@+id/difficulty_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Level"
+            android:textStyle="bold"
+            android:textSize="50sp"
+            android:textColor="#33b5e5"
+            android:gravity="center_horizontal" />
 
+    </LinearLayout>
 
-        </LinearLayout>
     <LinearLayout style="?metaButtonBarStyle"
         android:paddingTop="10dp"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-         android:orientation="horizontal"
-        tools:ignore="UselessParent"
-        android:layout_below="@id/linearLayout"
-
-        android:gravity="center"
-        android:id="@+id/LlinearLayout">
-
-
-    <TextView
-        android:id="@+id/problem_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Problem"
-        android:textStyle="bold" android:textSize="35sp"
-        android:textColor="#33b5e5"
-        android:gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent"
+        android:gravity="center">
+
+
+        <TextView
+            android:id="@+id/problem_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Problem"
+            android:textStyle="bold"
+            android:textSize="35sp"
+            android:textColor="#33b5e5"
+            android:gravity="center_horizontal" />
+
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:numColumns="3"
+        android:horizontalSpacing="16dp"
+        android:layout_marginLeft="@dimen/padding_large"
+        android:layout_marginRight="@dimen/padding_large"
+        android:visibility="visible"/>
+
+
+
 
 </LinearLayout>
-
-
-
-
-</RelativeLayout>
