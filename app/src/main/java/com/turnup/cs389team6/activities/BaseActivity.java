@@ -3,7 +3,7 @@ package com.turnup.cs389team6.activities;
 import android.app.Activity;
 import android.os.Bundle;
 
-/**
+/***
  * Created by Dheer on 3/24/2015.
  */
 public abstract class BaseActivity extends Activity {

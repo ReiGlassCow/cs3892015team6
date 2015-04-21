@@ -6,7 +6,7 @@ package com.turnup.cs389team6.constants;
 public enum Difficulty {
     LEVEL_ONE(0, 11, Operation.ADD,Operation.SUBTRACT),
     LEVEL_TWO(0, 16, Operation.ADD, Operation.SUBTRACT, Operation.MULTIPLICATION),
-    LEVEL_THREE (0, 21, Operation.ADD, Operation.SUBTRACT, Operation.MULTIPLICATION, Operation.DIVISION);
+    LEVEL_THREE(0, 21, Operation.ADD, Operation.SUBTRACT, Operation.MULTIPLICATION, Operation.DIVISION);
 
     private final int minValue;
     private final int maxValue;
