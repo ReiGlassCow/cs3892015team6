@@ -20,12 +20,13 @@ public class GameActivity extends BaseActivity {
     private Difficulty selectedDifficulty;
 
     private Random rand;
-    private TextView problem, chosenLevel;
+    private TextView problem, chosenLevel, score;
     private int problemAnswer;
     private Integer[] possibleAnswers = new Integer[6];
 
     private GridView mGridView;
     private int questionCounter = 0;
+    private int scoreCounter=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class GameActivity extends BaseActivity {
         selectedDifficulty = (Difficulty) getIntent().getSerializableExtra(MathOptionsActivity.EXTRA_DIFFICULTY);
         setContentView(R.layout.activity_game_layout);
         mGridView = (GridView) findViewById(R.id.grid_view);
+        score = (TextView) findViewById(R.id.score);
         chosenLevel = (TextView) findViewById(R.id.difficulty_textview);
         chosenLevel.setText(getString(R.string.level_title, selectedDifficulty.ordinal() + 1));
         problem = (TextView) findViewById(R.id.problem_textview);
@@ -41,6 +43,32 @@ public class GameActivity extends BaseActivity {
     }
 
     private void generateProblem(){
+        //Check score to determine difficulty.
+        if(scoreCounter==400){
+            switch (selectedDifficulty){
+                case LEVEL_ONE:
+                    Toast.makeText(GameActivity.this,"You are moving on to LEVEL 2!",Toast.LENGTH_LONG).show();
+                    chosenLevel.setText(getString(R.string.level_title, selectedDifficulty.ordinal() + 2));
+                    selectedDifficulty = Difficulty.LEVEL_TWO;
+                    scoreCounter=0;
+                    break;
+                case LEVEL_TWO:
+                    Toast.makeText(GameActivity.this,"You are moving on to LEVEL 3!",Toast.LENGTH_LONG).show();
+                    chosenLevel.setText(getString(R.string.level_title, selectedDifficulty.ordinal() + 2));
+                    selectedDifficulty = Difficulty.LEVEL_THREE;
+                    scoreCounter=0;
+                    break;
+
+            }
+
+
+
+            //selectedDifficulty = (Difficulty) getIntent().getSerializableExtra(MathOptionsActivity.EXTRA_DIFFICULTY+1);
+
+
+        }
+
+
         int selectedOp = rand.nextInt(selectedDifficulty.getSupportedOperations().length);
         Operation op = selectedDifficulty.getSupportedOperations()[selectedOp];
         int firstOperand = rand.nextInt(selectedDifficulty.getMaxValue() + Math.abs(selectedDifficulty.getMinValue()));
@@ -111,10 +139,14 @@ public class GameActivity extends BaseActivity {
                 //animate text of score.
                 if(mGridAdapter.getItem(position).intValue() == problemAnswer){
                     Toast.makeText(GameActivity.this, "Correct Answer!", Toast.LENGTH_SHORT).show();
+                    scoreCounter=scoreCounter+50;
+                    score.setText("Score: "+scoreCounter);
                     //correct. animate score up
                 } else {
                     Toast.makeText(GameActivity.this, "Wrong Answer", Toast.LENGTH_SHORT).show();
                     //wrong animate score down
+                    scoreCounter--;
+                    score.setText("Score: "+scoreCounter);
                 }
                 generateProblem();
             }
