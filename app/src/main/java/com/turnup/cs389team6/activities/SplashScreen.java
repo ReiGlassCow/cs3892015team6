@@ -21,7 +21,7 @@ public class SplashScreen extends BaseActivity {
 
             @Override
             public void run() {
-                Intent navigation = new Intent(SplashScreen.this, NavigationActivity.class);
+                Intent navigation = new Intent(SplashScreen.this, MathOptionsActivity.class);
                 SplashScreen.this.startActivity(navigation);
                 SplashScreen.this.finish();
             }

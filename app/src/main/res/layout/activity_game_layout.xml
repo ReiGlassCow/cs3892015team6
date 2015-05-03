@@ -4,19 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-
     tools:context="com.turnup.cs389team6.activities.Game"
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_marginBottom="@dimen/padding_large"
         style="?metaButtonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black_overlay"
+        android:background="@color/logo_yellow"
         android:orientation="horizontal"
         android:gravity="center"
         android:id="@+id/linearLayout">
-
 
         <TextView
             android:id="@+id/difficulty_textview"
@@ -25,45 +24,34 @@
             android:text="Level"
             android:textStyle="bold"
             android:textSize="50sp"
-            android:textColor="#33b5e5"
+            android:textColor="@color/logo_blue"
             android:gravity="center_horizontal" />
 
     </LinearLayout>
 
-    <LinearLayout style="?metaButtonBarStyle"
-        android:paddingTop="10dp"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/problem_textview"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Problem"
+        android:textStyle="bold"
+        android:textSize="40sp"
         android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        tools:ignore="UselessParent"
-        android:gravity="center">
-
-
-        <TextView
-            android:id="@+id/problem_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Problem"
-            android:textStyle="bold"
-            android:textSize="35sp"
-            android:textColor="#33b5e5"
-            android:gravity="center_horizontal" />
-
-    </LinearLayout>
+        android:textColor="@color/logo_blue"
+        android:gravity="center_horizontal" />
 
     <GridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="@dimen/padding_large"
+        android:layout_marginBottom="24dp"
         android:numColumns="3"
-        android:horizontalSpacing="16dp"
+        android:horizontalSpacing="24dp"
         android:layout_marginLeft="@dimen/padding_large"
-        android:layout_marginRight="@dimen/padding_large"
-        android:visibility="visible"/>
+        android:layout_marginRight="@dimen/padding_large"/>
+
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -72,15 +60,15 @@
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:id="@+id/imageView2"
-                android:src="@drawable/trophy"
-                />
+                android:src="@drawable/trophy"/>
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Score: "
+                android:textColor="@color/logo_blue"
                 android:id="@+id/score"/>
-
 
     </LinearLayout>
 

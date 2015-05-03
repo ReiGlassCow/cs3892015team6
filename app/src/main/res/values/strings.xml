@@ -14,5 +14,9 @@
 
     <string name="title_activity_game">Game</string>
     <string name="level_title">Level %1$d</string>
+    <string name="correct_answer">Correct Answer!</string>
+    <string name="wrong_answer">Wrong Answer!</string>
+    <string name="endless_mode">You have reached endless mode, keep going!</string>
+    <string name="choose_a_level">Choose a Level</string>
 
 </resources>

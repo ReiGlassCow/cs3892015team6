@@ -42,30 +42,35 @@ public class GameActivity extends BaseActivity {
         generateProblem();
     }
 
+    private boolean isEndlessMode = false;
+
     private void generateProblem(){
         //Check score to determine difficulty.
-        if(scoreCounter==400){
-            switch (selectedDifficulty){
+        if(scoreCounter >= 400){
+            switch (selectedDifficulty) {
                 case LEVEL_ONE:
-                    Toast.makeText(GameActivity.this,"You are moving on to LEVEL 2!",Toast.LENGTH_LONG).show();
-                    chosenLevel.setText(getString(R.string.level_title, selectedDifficulty.ordinal() + 2));
+                    Toast.makeText(GameActivity.this, "You are moving on to LEVEL 2!", Toast.LENGTH_LONG).show();
                     selectedDifficulty = Difficulty.LEVEL_TWO;
-                    scoreCounter=0;
+                    chosenLevel.setText(getString(R.string.level_title, selectedDifficulty.ordinal() + 1));
+                    scoreCounter = 0;
+                    score.setText("Score: "+ scoreCounter);
                     break;
                 case LEVEL_TWO:
-                    Toast.makeText(GameActivity.this,"You are moving on to LEVEL 3!",Toast.LENGTH_LONG).show();
-                    chosenLevel.setText(getString(R.string.level_title, selectedDifficulty.ordinal() + 2));
                     selectedDifficulty = Difficulty.LEVEL_THREE;
-                    scoreCounter=0;
+                    Toast.makeText(GameActivity.this, "You are moving on to LEVEL 3!", Toast.LENGTH_SHORT).show();
+                    chosenLevel.setText(getString(R.string.level_title, selectedDifficulty.ordinal() + 1));
+                    scoreCounter = 0;
+                    score.setText("Score: "+ scoreCounter);
                     break;
+                case LEVEL_THREE:
+                    if(!isEndlessMode){
+                        isEndlessMode = true;
+                        Toast.makeText(GameActivity.this, R.string.endless_mode, Toast.LENGTH_SHORT).show();
+                    }
+
 
             }
-
-
-
             //selectedDifficulty = (Difficulty) getIntent().getSerializableExtra(MathOptionsActivity.EXTRA_DIFFICULTY+1);
-
-
         }
 
 
@@ -138,15 +143,15 @@ public class GameActivity extends BaseActivity {
                 //edit Questions Left Value;
                 //animate text of score.
                 if(mGridAdapter.getItem(position).intValue() == problemAnswer){
-                    Toast.makeText(GameActivity.this, "Correct Answer!", Toast.LENGTH_SHORT).show();
-                    scoreCounter=scoreCounter+50;
+                    Toast.makeText(GameActivity.this, R.string.correct_answer, Toast.LENGTH_SHORT).show();
+                    scoreCounter += 50;
                     score.setText("Score: "+scoreCounter);
                     //correct. animate score up
                 } else {
-                    Toast.makeText(GameActivity.this, "Wrong Answer", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GameActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
                     //wrong animate score down
-                    scoreCounter--;
-                    score.setText("Score: "+scoreCounter);
+                    scoreCounter -=25;
+                    score.setText("Score: " +scoreCounter);
                 }
                 generateProblem();
             }
