@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="@color/white"
+
     tools:context="com.turnup.cs389team6.activities.Game"
     android:orientation="vertical">
 
@@ -64,15 +65,22 @@
         android:layout_marginRight="@dimen/padding_large"
         android:visibility="visible"/>
     <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+        <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:id="@+id/imageView2"
+                android:src="@drawable/trophy"
+                />
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Score: "
                 android:id="@+id/score"/>
+
 
     </LinearLayout>
 

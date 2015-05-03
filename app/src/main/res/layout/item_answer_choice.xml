@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="18sp"
-    android:textColor="@android:color/white"
+    android:textColor="@color/Light_Brown"
+
     android:gravity="center"
     android:layout_gravity="center_vertical"
     android:background="@android:color/transparent"
