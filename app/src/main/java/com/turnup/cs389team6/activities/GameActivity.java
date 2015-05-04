@@ -1,5 +1,6 @@
 package com.turnup.cs389team6.activities;
 
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -27,7 +28,7 @@ public class GameActivity extends BaseActivity {
     private Integer[] possibleAnswers = new Integer[6];
     private long totalTime = 31000;
     private CountDownTimer timer;
-    private MediaPlayer woo,cheer,wrong_answer,sad;
+    private MediaPlayer woo,cheer,wrong_answer,sad,sad_one,countdown;
     private GridView mGridView;
     private int questionCounter = 0;
     private int scoreCounter= 0;
@@ -41,10 +42,12 @@ public class GameActivity extends BaseActivity {
         setContentView(R.layout.activity_game_layout);
 
         //Media sounds
+        countdown = MediaPlayer.create(GameActivity.this,R.raw.countdown);
         woo = MediaPlayer.create(GameActivity.this,R.raw.woo);
         cheer = MediaPlayer.create(GameActivity.this,R.raw.cheer);
-        wrong_answer = MediaPlayer.create(GameActivity.this,R.raw.wrong_answer);
+        wrong_answer = MediaPlayer.create(GameActivity.this,R.raw.no_torture);
         sad = MediaPlayer.create(GameActivity.this,R.raw.sad_trombone);
+        sad_one = MediaPlayer.create(GameActivity.this,R.raw.sad_one);
         mGridView = (GridView) findViewById(R.id.grid_view);
         score = (TextView) findViewById(R.id.score);
         timerText = (TextView) findViewById(R.id.timer);
@@ -59,11 +62,13 @@ public class GameActivity extends BaseActivity {
                 timerText.setText("Time: " + millisUntilFinished/1000);
             }
             public void onFinish(){
-                Toast.makeText(GameActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
                 sad.start();
+                Toast.makeText(GameActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
+
                 scoreCounter -= 25;
                 score.setText("Score: "+scoreCounter);
                 totalTime = 31000;
+                sad.stop();
                 generateProblem();
             }
         };
@@ -83,7 +88,12 @@ public class GameActivity extends BaseActivity {
         timer = new CountDownTimer(totalTime, 1000) {
             public void onTick(long millisUntilFinished) {
                 totalTime = millisUntilFinished;
+                timerText.setTextColor(Color.GREEN);
                 timerText.setText("Time: " + (millisUntilFinished / 1000));
+                if((millisUntilFinished/1000)<=7){
+                    timerText.setTextColor(Color.RED);
+                    countdown.start();
+                }
             }
 
             public void onFinish() {
@@ -200,14 +210,30 @@ public class GameActivity extends BaseActivity {
                 //edit Questions Left Value;
                 //animate text of score.
                 if(mGridAdapter.getItem(position).intValue() == problemAnswer){
-                    woo.start();
+
+
                     Toast.makeText(GameActivity.this, R.string.correct_answer, Toast.LENGTH_SHORT).show();
+                    view.setBackgroundColor(Color.GREEN);
                     scoreCounter += 50;
                     score.setText("Score: "+scoreCounter);
                     totalTime = 31000;
                     //correct. animate score up
                 } else {
-                    wrong_answer.start();
+                    int sound = rand.nextInt(2);
+                    switch (sound){
+                        case 0:
+                            wrong_answer.start();
+                            break;
+                        case 1:
+                            sad_one.start();
+                            break;
+
+
+                    }
+
+
+
+
                     Toast.makeText(GameActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
                     //wrong animate score down
                     scoreCounter -=25;
