@@ -109,7 +109,7 @@ public class GameActivity extends BaseActivity {
 
     private void generateProblem(){
         //Check score to determine difficulty.
-        if(scoreCounter >= 400){
+        if(scoreCounter >= 400 && !isEndlessMode){
             cheer.start();
             switch (selectedDifficulty) {
                 case LEVEL_ONE:
@@ -211,7 +211,7 @@ public class GameActivity extends BaseActivity {
                 //animate text of score.
                 if(mGridAdapter.getItem(position).intValue() == problemAnswer){
 
-
+                    woo.start();
                     Toast.makeText(GameActivity.this, R.string.correct_answer, Toast.LENGTH_SHORT).show();
                     view.setBackgroundColor(Color.GREEN);
                     scoreCounter += 50;
