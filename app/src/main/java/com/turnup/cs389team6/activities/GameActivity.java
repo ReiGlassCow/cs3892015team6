@@ -1,5 +1,6 @@
 package com.turnup.cs389team6.activities;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,7 +24,7 @@ public class GameActivity extends BaseActivity {
     private TextView problem, chosenLevel, score;
     private int problemAnswer;
     private Integer[] possibleAnswers = new Integer[6];
-
+    MediaPlayer cheer,woo,wrong_answer;
     private GridView mGridView;
     private int questionCounter = 0;
     private int scoreCounter=0;
@@ -33,6 +34,10 @@ public class GameActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         selectedDifficulty = (Difficulty) getIntent().getSerializableExtra(MathOptionsActivity.EXTRA_DIFFICULTY);
         setContentView(R.layout.activity_game_layout);
+        //Sounds
+        cheer = MediaPlayer.create(GameActivity.this,R.raw.cheer);
+        woo = MediaPlayer.create(GameActivity.this,R.raw.woo);
+        wrong_answer = MediaPlayer.create(GameActivity.this,R.raw.wrong_answer);
         mGridView = (GridView) findViewById(R.id.grid_view);
         score = (TextView) findViewById(R.id.score);
         chosenLevel = (TextView) findViewById(R.id.difficulty_textview);
@@ -47,8 +52,12 @@ public class GameActivity extends BaseActivity {
     private void generateProblem(){
         //Check score to determine difficulty.
         if(scoreCounter >= 400){
+            //Play cheer
+            cheer.start();
             switch (selectedDifficulty) {
                 case LEVEL_ONE:
+
+
                     Toast.makeText(GameActivity.this, "You are moving on to LEVEL 2!", Toast.LENGTH_LONG).show();
                     selectedDifficulty = Difficulty.LEVEL_TWO;
                     chosenLevel.setText(getString(R.string.level_title, selectedDifficulty.ordinal() + 1));
@@ -143,11 +152,13 @@ public class GameActivity extends BaseActivity {
                 //edit Questions Left Value;
                 //animate text of score.
                 if(mGridAdapter.getItem(position).intValue() == problemAnswer){
+                    woo.start();
                     Toast.makeText(GameActivity.this, R.string.correct_answer, Toast.LENGTH_SHORT).show();
                     scoreCounter += 50;
                     score.setText("Score: "+scoreCounter);
                     //correct. animate score up
                 } else {
+                    wrong_answer.start();
                     Toast.makeText(GameActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
                     //wrong animate score down
                     scoreCounter -=25;
