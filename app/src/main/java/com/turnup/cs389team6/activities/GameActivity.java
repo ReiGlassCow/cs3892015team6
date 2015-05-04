@@ -4,13 +4,11 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.view.animation.AnimationUtils;
+import android.widget.*;
+import android.view.ViewGroup.LayoutParams;
 import com.turnup.cs389team6.R;
 import com.turnup.cs389team6.constants.Difficulty;
 import com.turnup.cs389team6.constants.Operation;
@@ -34,12 +32,32 @@ public class GameActivity extends BaseActivity {
     private int scoreCounter= 0;
     private boolean isEndlessMode = false;
 
+    PopupWindow popUp;
+    LinearLayout layout;
+    TextView tv;
+    LayoutParams params;
+    LinearLayout mainLayout;
+    Button but;
+    boolean click = true;
+
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         selectedDifficulty = (Difficulty) getIntent().getSerializableExtra(MathOptionsActivity.EXTRA_DIFFICULTY);
         setContentView(R.layout.activity_game_layout);
+
+
+
+
+
+
 
         //Media sounds
         countdown = MediaPlayer.create(GameActivity.this,R.raw.countdown);
@@ -56,9 +74,19 @@ public class GameActivity extends BaseActivity {
         problem = (TextView) findViewById(R.id.problem_textview);
         rand = new Random();
 
+
+
+
+
+
+
+        timerText.startAnimation(AnimationUtils.loadAnimation(GameActivity.this, android.R.anim.slide_in_left));
+
         timer = new CountDownTimer(totalTime,1000){
+
             public void onTick(long millisUntilFinished){
                 totalTime = millisUntilFinished;
+
                 timerText.setText("Time: " + millisUntilFinished/1000);
             }
             public void onFinish(){
@@ -89,6 +117,7 @@ public class GameActivity extends BaseActivity {
             public void onTick(long millisUntilFinished) {
                 totalTime = millisUntilFinished;
                 timerText.setTextColor(Color.GREEN);
+
                 timerText.setText("Time: " + (millisUntilFinished / 1000));
                 if((millisUntilFinished/1000)<=7){
                     timerText.setTextColor(Color.RED);
@@ -174,6 +203,7 @@ public class GameActivity extends BaseActivity {
                 break;
         }
 
+        problem.startAnimation(AnimationUtils.loadAnimation(GameActivity.this, android.R.anim.fade_in));
         problem.setText(firstOperand + operationSign + secondOperand + " = ?");
         generateArrayOfPossibleAnswers();
         //Starts the timer
