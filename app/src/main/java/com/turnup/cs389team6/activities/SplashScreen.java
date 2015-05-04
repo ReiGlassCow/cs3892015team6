@@ -10,7 +10,7 @@ import com.turnup.cs389team6.R;
  */
 public class SplashScreen extends BaseActivity {
 
-    public final int TIME_OUT = 2000;
+    public final int TIME_OUT = 4000;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
