@@ -1,5 +1,6 @@
 package com.turnup.cs389team6.activities;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -26,7 +27,7 @@ public class GameActivity extends BaseActivity {
     private Integer[] possibleAnswers = new Integer[6];
     private long totalTime = 31000;
     private CountDownTimer timer;
-
+    private MediaPlayer woo,cheer,wrong_answer,sad;
     private GridView mGridView;
     private int questionCounter = 0;
     private int scoreCounter= 0;
@@ -38,6 +39,12 @@ public class GameActivity extends BaseActivity {
 
         selectedDifficulty = (Difficulty) getIntent().getSerializableExtra(MathOptionsActivity.EXTRA_DIFFICULTY);
         setContentView(R.layout.activity_game_layout);
+
+        //Media sounds
+        woo = MediaPlayer.create(GameActivity.this,R.raw.woo);
+        cheer = MediaPlayer.create(GameActivity.this,R.raw.cheer);
+        wrong_answer = MediaPlayer.create(GameActivity.this,R.raw.wrong_answer);
+        sad = MediaPlayer.create(GameActivity.this,R.raw.sad_trombone);
         mGridView = (GridView) findViewById(R.id.grid_view);
         score = (TextView) findViewById(R.id.score);
         timerText = (TextView) findViewById(R.id.timer);
@@ -53,6 +60,7 @@ public class GameActivity extends BaseActivity {
             }
             public void onFinish(){
                 Toast.makeText(GameActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
+                sad.start();
                 scoreCounter -= 25;
                 score.setText("Score: "+scoreCounter);
                 totalTime = 31000;
@@ -92,6 +100,7 @@ public class GameActivity extends BaseActivity {
     private void generateProblem(){
         //Check score to determine difficulty.
         if(scoreCounter >= 400){
+            cheer.start();
             switch (selectedDifficulty) {
                 case LEVEL_ONE:
                     Toast.makeText(GameActivity.this, "You are moving on to LEVEL 2!", Toast.LENGTH_LONG).show();
@@ -191,12 +200,14 @@ public class GameActivity extends BaseActivity {
                 //edit Questions Left Value;
                 //animate text of score.
                 if(mGridAdapter.getItem(position).intValue() == problemAnswer){
+                    woo.start();
                     Toast.makeText(GameActivity.this, R.string.correct_answer, Toast.LENGTH_SHORT).show();
                     scoreCounter += 50;
                     score.setText("Score: "+scoreCounter);
                     totalTime = 31000;
                     //correct. animate score up
                 } else {
+                    wrong_answer.start();
                     Toast.makeText(GameActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
                     //wrong animate score down
                     scoreCounter -=25;
