@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
@@ -33,7 +34,7 @@ public class GameActivity extends BaseActivity {
     private int scoreCounter= 0;
     private boolean isEndlessMode = false;
     private ImageView stats;
-
+    Point p;
     PopupWindow popUp;
     LinearLayout layout;
     TextView tv;
@@ -56,9 +57,9 @@ public class GameActivity extends BaseActivity {
         setContentView(R.layout.activity_game_layout);
 
 
-
-
         stats = (ImageView) findViewById(R.id.statistics);
+
+
 
         //Media sounds
         countdown = MediaPlayer.create(GameActivity.this,R.raw.countdown);
@@ -76,10 +77,19 @@ public class GameActivity extends BaseActivity {
         rand = new Random();
 
 
+        stats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (p != null){
+                    showPopup(GameActivity.this,p);
+
+                }
+            }
+        });
 
 
 
-        timerText.startAnimation(AnimationUtils.loadAnimation(GameActivity.this, android.R.anim.slide_in_left));
+       // timerText.startAnimation(AnimationUtils.loadAnimation(GameActivity.this, android.R.anim.slide_in_left));
 
         timer = new CountDownTimer(totalTime,1000){
 
@@ -102,13 +112,59 @@ public class GameActivity extends BaseActivity {
         generateProblem();
     }
 
-    //@Override
+
+
+
+    public void onWindowFocusChanged(boolean hasFocus) {
+
+        int[] location = new int[2];
+
+
+        // Get the x, y location and store it in the location[] array
+        // location[0] = x, location[1] = y.
+        stats.getLocationOnScreen(location);
+
+        //Initialize the Point with x, and y positions
+        p = new Point();
+        p.x = location[0];
+        p.y = location[1];
+    }
+
+
+
+    private void showPopup(GameActivity gameActivity, Point p) {
+
+        int popUpWidth = 400;
+        int popUpHeight = 350;
+
+        LinearLayout viewGroup = (LinearLayout) gameActivity.findViewById(R.id.popup);
+        LayoutInflater layoutInflater = (LayoutInflater) gameActivity
+                .getSystemService(gameActivity.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.stats, viewGroup);
+
+        final PopupWindow popup = new PopupWindow(gameActivity);
+        popup.setContentView(layout);
+        popup.setWidth(popUpWidth);
+        popup.setHeight(popUpHeight);
+        popup.setFocusable(true);
+
+        int OFFSET_X = 50;
+        int OFFSET_Y = 50;
+
+        popup.showAtLocation(layout, Gravity.CENTER, p.x + OFFSET_X, p.y + OFFSET_Y);
+
+
+
+
+    }
+
+    @Override
     protected void onStop(){
         super.onStop();
         timer.cancel();
     }
 
-    //@Override
+    @Override
     protected void onResume(){
         super.onResume();
 
