@@ -1,6 +1,7 @@
 package com.turnup.cs389team6.activities;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,29 +21,73 @@ public class GameActivity extends BaseActivity {
     private Difficulty selectedDifficulty;
 
     private Random rand;
-    private TextView problem, chosenLevel, score;
+    private TextView problem, chosenLevel, score, timerText;
     private int problemAnswer;
     private Integer[] possibleAnswers = new Integer[6];
+    private long totalTime = 31000;
+    private CountDownTimer timer;
 
     private GridView mGridView;
     private int questionCounter = 0;
-    private int scoreCounter=0;
+    private int scoreCounter= 0;
+    private boolean isEndlessMode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         selectedDifficulty = (Difficulty) getIntent().getSerializableExtra(MathOptionsActivity.EXTRA_DIFFICULTY);
         setContentView(R.layout.activity_game_layout);
         mGridView = (GridView) findViewById(R.id.grid_view);
         score = (TextView) findViewById(R.id.score);
+        timerText = (TextView) findViewById(R.id.timer);
         chosenLevel = (TextView) findViewById(R.id.difficulty_textview);
         chosenLevel.setText(getString(R.string.level_title, selectedDifficulty.ordinal() + 1));
         problem = (TextView) findViewById(R.id.problem_textview);
         rand = new Random();
+
+        timer = new CountDownTimer(totalTime,1000){
+            public void onTick(long millisUntilFinished){
+                totalTime = millisUntilFinished;
+                timerText.setText("Time: " + millisUntilFinished/1000);
+            }
+            public void onFinish(){
+                Toast.makeText(GameActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
+                scoreCounter -= 25;
+                score.setText("Score: "+scoreCounter);
+                totalTime = 31000;
+                generateProblem();
+            }
+        };
         generateProblem();
     }
 
-    private boolean isEndlessMode = false;
+    //@Override
+    protected void onStop(){
+        super.onStop();
+        timer.cancel();
+    }
+
+    //@Override
+    protected void onResume(){
+        super.onResume();
+
+        timer = new CountDownTimer(totalTime, 1000) {
+            public void onTick(long millisUntilFinished) {
+                totalTime = millisUntilFinished;
+                timerText.setText("Time: " + (millisUntilFinished / 1000));
+            }
+
+            public void onFinish() {
+                Toast.makeText(GameActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
+                scoreCounter -= 25;
+                score.setText("Score: "+scoreCounter);
+                totalTime = 31000;
+                generateProblem();
+            }
+        };
+        timer.start();
+    }
 
     private void generateProblem(){
         //Check score to determine difficulty.
@@ -112,7 +157,10 @@ public class GameActivity extends BaseActivity {
 
         problem.setText(firstOperand + operationSign + secondOperand + " = ?");
         generateArrayOfPossibleAnswers();
+        //Starts the timer
+        timer.start();
     }
+
 
     private void generateArrayOfPossibleAnswers(){
         for(int i = 0; i < possibleAnswers.length; i++){
@@ -146,12 +194,14 @@ public class GameActivity extends BaseActivity {
                     Toast.makeText(GameActivity.this, R.string.correct_answer, Toast.LENGTH_SHORT).show();
                     scoreCounter += 50;
                     score.setText("Score: "+scoreCounter);
+                    totalTime = 31000;
                     //correct. animate score up
                 } else {
                     Toast.makeText(GameActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
                     //wrong animate score down
                     scoreCounter -=25;
                     score.setText("Score: " +scoreCounter);
+                    totalTime = 31000;
                 }
                 generateProblem();
             }
