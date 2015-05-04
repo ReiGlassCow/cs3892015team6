@@ -73,7 +73,7 @@
         <ImageView
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView3"
+                android:id="@+id/statistics"
                 android:src="@drawable/question"
                 android:paddingLeft="30dp"
                 />

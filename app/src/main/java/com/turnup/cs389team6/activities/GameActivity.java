@@ -1,6 +1,7 @@
 package com.turnup.cs389team6.activities;
 
 import android.graphics.Color;
+import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -31,6 +32,7 @@ public class GameActivity extends BaseActivity {
     private int questionCounter = 0;
     private int scoreCounter= 0;
     private boolean isEndlessMode = false;
+    private ImageView stats;
 
     PopupWindow popUp;
     LinearLayout layout;
@@ -56,8 +58,7 @@ public class GameActivity extends BaseActivity {
 
 
 
-
-
+        stats = (ImageView) findViewById(R.id.statistics);
 
         //Media sounds
         countdown = MediaPlayer.create(GameActivity.this,R.raw.countdown);
@@ -73,8 +74,6 @@ public class GameActivity extends BaseActivity {
         chosenLevel.setText(getString(R.string.level_title, selectedDifficulty.ordinal() + 1));
         problem = (TextView) findViewById(R.id.problem_textview);
         rand = new Random();
-
-
 
 
 
