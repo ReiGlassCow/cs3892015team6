@@ -109,8 +109,11 @@ public class GameActivity extends BaseActivity {
                 timerText.setText("Time: " + millisUntilFinished/1000);
             }
             public void onFinish(){
-                if(activityStopped)
+                if(activityStopped || timer != this){
+                    this.cancel();
                     return;
+                }
+
                 sad.start();
                 Toast.makeText(GameActivity.this, R.string.time_up, Toast.LENGTH_SHORT).show();
 
@@ -204,8 +207,11 @@ public class GameActivity extends BaseActivity {
             }
 
             public void onFinish() {
-                if(activityStopped)
+                if(activityStopped || timer != this){
+                    this.cancel();
                     return;
+                }
+
                 Toast.makeText(GameActivity.this, R.string.time_up, Toast.LENGTH_SHORT).show();
                 scoreCounter -= 25;
                 score.setText("Score: "+scoreCounter);
