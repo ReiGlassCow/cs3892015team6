@@ -18,5 +18,6 @@
     <string name="wrong_answer">Wrong Answer!</string>
     <string name="endless_mode">You have reached endless mode, keep going!</string>
     <string name="choose_a_level">Choose a Level</string>
+    <string name="time_up">Time Up</string>
 
 </resources>

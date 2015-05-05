@@ -101,10 +101,6 @@ public class GameActivity extends BaseActivity {
             }
         });
 
-
-
-
-
         timer = new CountDownTimer(totalTime,1000){
 
             public void onTick(long millisUntilFinished){
@@ -113,8 +109,10 @@ public class GameActivity extends BaseActivity {
                 timerText.setText("Time: " + millisUntilFinished/1000);
             }
             public void onFinish(){
+                if(activityStopped)
+                    return;
                 sad.start();
-                Toast.makeText(GameActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
+                Toast.makeText(GameActivity.this, R.string.time_up, Toast.LENGTH_SHORT).show();
 
                 scoreCounter -= 25;
                 score.setText("Score: "+scoreCounter);
@@ -140,7 +138,7 @@ public class GameActivity extends BaseActivity {
 
 
         popupStats = new PopupWindow(layoutOfPopup, LayoutParams.FILL_PARENT,
-        LayoutParams.WRAP_CONTENT);
+                LayoutParams.WRAP_CONTENT);
         popupStats.setContentView(layoutOfPopup);
     }
 
@@ -166,23 +164,33 @@ public class GameActivity extends BaseActivity {
         int OFFSET_X = 0;
         int OFFSET_Y = 250;
 
-popupStats.setWidth(300);
-popupStats.setHeight(300);
-popupStats.showAtLocation(layoutOfPopup, Gravity.CENTER, OFFSET_X, OFFSET_Y);
+        popupStats.setWidth(300);
+        popupStats.setHeight(300);
+        popupStats.showAtLocation(layoutOfPopup, Gravity.CENTER, OFFSET_X, OFFSET_Y);
 
 
+    }
+
+    private boolean activityStopped;
+
+    @Override
+    protected void onStart() {
+        activityStopped = false;
+        super.onStart();
     }
 
     @Override
     protected void onStop(){
-        super.onStop();
         timer.cancel();
+        activityStopped = true;
+        super.onStop();
     }
+
+
 
     @Override
     protected void onResume(){
         super.onResume();
-
         timer = new CountDownTimer(totalTime, 1000) {
             public void onTick(long millisUntilFinished) {
                 totalTime = millisUntilFinished;
@@ -196,7 +204,9 @@ popupStats.showAtLocation(layoutOfPopup, Gravity.CENTER, OFFSET_X, OFFSET_Y);
             }
 
             public void onFinish() {
-                Toast.makeText(GameActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
+                if(activityStopped)
+                    return;
+                Toast.makeText(GameActivity.this, R.string.time_up, Toast.LENGTH_SHORT).show();
                 scoreCounter -= 25;
                 score.setText("Score: "+scoreCounter);
                 totalTime = 31000;
@@ -204,6 +214,7 @@ popupStats.showAtLocation(layoutOfPopup, Gravity.CENTER, OFFSET_X, OFFSET_Y);
             }
         };
         timer.start();
+
     }
 
     private void generateProblem(){
@@ -289,12 +300,12 @@ popupStats.showAtLocation(layoutOfPopup, Gravity.CENTER, OFFSET_X, OFFSET_Y);
         possibleAnswers[answerPos] = problemAnswer;
         for(int i = 0; i < possibleAnswers.length; i++){
             if(possibleAnswers[i] == Integer.MAX_VALUE){
-               int possibleAnswer = problemAnswer;
-               do{
-                   possibleAnswer = rand.nextInt(selectedDifficulty.getMaxValue() * 3);
-               } while(possibleAnswer == problemAnswer);
-               possibleAnswers[i] =  possibleAnswer;
-               //possibleAnswers[i] = (generatedWrongAnswer)
+                int possibleAnswer = problemAnswer;
+                do{
+                    possibleAnswer = rand.nextInt(selectedDifficulty.getMaxValue() * 3);
+                } while(possibleAnswer == problemAnswer);
+                possibleAnswers[i] =  possibleAnswer;
+                //possibleAnswers[i] = (generatedWrongAnswer)
             }
         }
         setupGridAdapter();
@@ -332,9 +343,6 @@ popupStats.showAtLocation(layoutOfPopup, Gravity.CENTER, OFFSET_X, OFFSET_Y);
 
 
                     }
-
-
-
 
                     Toast.makeText(GameActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
                     //wrong animate score down
