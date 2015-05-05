@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
+
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -8,7 +8,8 @@
 
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+            />
 
         <ImageView
             android:id="@+id/splashScreen"
@@ -17,9 +18,8 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:src="@drawable/test_splash" />
-=======
-    android:orientation="vertical" android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+
+
 <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -30,7 +30,7 @@
         android:layout_centerInParent="true"
         android:src="@drawable/test_splash"
         android:layout_gravity="center" />
->>>>>>> origin/master
+
 
     </FrameLayout>
 </LinearLayout>
