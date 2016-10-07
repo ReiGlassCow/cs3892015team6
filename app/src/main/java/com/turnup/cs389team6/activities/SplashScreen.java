@@ -10,7 +10,7 @@ import com.turnup.cs389team6.R;
  */
 public class SplashScreen extends BaseActivity {
 
-    public final int TIME_OUT = 2000;
+    public final int TIME_OUT = 4000;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class SplashScreen extends BaseActivity {
 
             @Override
             public void run() {
-                Intent navigation = new Intent(SplashScreen.this, NavigationActivity.class);
+                Intent navigation = new Intent(SplashScreen.this, MathOptionsActivity.class);
                 SplashScreen.this.startActivity(navigation);
                 SplashScreen.this.finish();
             }

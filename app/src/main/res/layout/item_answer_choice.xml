@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/answer_item_textview"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="24sp"
+    android:textColor="@color/logo_blue"
+    android:gravity="center"
+    android:background="@android:drawable/btn_default"
+    android:layout_gravity="center_vertical"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:padding="8dp"/>
